@@ -1,11 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import Button from "./controls/button/Button";
-var btn1 = <Button value={1} readonly="true"/>;
-var btn2 = <Button value={1} readonly="true"/>;
-var buttons = [btn1,btn2];
-ReactDOM.render(buttons, document.getElementById('root'));
+import Controls from "./controls/index";
+
+var viewModel = {
+  button1: null,
+  button2: null
+};
+
+var view = [
+  <Controls.Button type="primary" disabled={false} content="Primary" init={(button) => {
+    viewModel.button1 = button;
+    button.on("click", function () {
+      button.content = 1234;
+      viewModel.button2.content = "2345";
+    });
+  }}
+  />,
+  <Controls.Button content="default" init={button => viewModel.button2 = button} />
+];
+
+ReactDOM.render(view, document.getElementById('root'));
+
 registerServiceWorker();

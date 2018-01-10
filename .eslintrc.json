@@ -11,14 +11,21 @@
     },
     "sourceType": "module"
   },
+  "parser": "babel-eslint",
+  "plugins": [
+    "react"
+  ],
   "rules": {
     "no-const-assign": "warn",
     "no-this-before-super": "warn",
     "no-undef": "warn",
     "no-unreachable": "warn",
-    "no-unused-vars": "warn",
     "constructor-super": "warn",
     "valid-typeof": "warn",
-    "no-extra-semi": "error"
+    "no-extra-semi": "error",
+    "react/sort-comp": 0,
+    "react/prop-types": 0,
+    "react/jsx-first-prop-new-line": 0,
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".md"] }]
   }
 }
