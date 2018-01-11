@@ -15,10 +15,31 @@ var view = [
     button.on("click", function () {
       button.content = 1234;
       viewModel.button2.content = "2345";
+      viewModel.button2.disabled = true;
+      viewModel.button2.visibility = false;
     });
   }}
   />,
-  <Controls.Button content="default" init={button => viewModel.button2 = button} />
+  <Controls.Button content="default"  size="small" init={button => {
+    viewModel.button2 = button;
+    button.on("click", function () {
+      console.log(arguments)
+    });
+  }} />,
+
+  <Controls.Button content="dashed" type="dashed" size="large" init={button => {
+    viewModel.button3 = button;
+    button.on("click", function () {
+      console.log(arguments)
+    });
+  }} />,
+
+  <Controls.Button content="danger" type="danger" init={button => {
+    viewModel.button4 = button;
+    button.on("click", function () {
+      console.log(arguments)
+    });
+  }} />
 ];
 
 ReactDOM.render(view, document.getElementById('root'));

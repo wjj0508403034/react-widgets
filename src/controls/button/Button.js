@@ -6,24 +6,25 @@ import "./style/Button.css"
 
 
 const ButtonTypes = ["primary", "ghost", "dashed", "danger"];
+const ButtonSizes = ['large', 'default', 'small'];
 
-class Props extends ControlProps {
+class ButtonProps extends ControlProps {
   constructor() {
     super();
-    this.definition.type = PropTypes.string;
-
-    this.value.className = "hy-btn";
+    this.add("type", PropTypes.string)
+      .add("size", PropTypes.oneOf(ButtonSizes), "default")
+      .defaultValue("className", "hy-btn");
   }
 }
 
-export let ButtonProps = Props;
+export { ButtonProps };
 
-const DEFAULT_PROPS = new ButtonProps();
+const PROPS = new ButtonProps();
 
 class Button extends Control {
 
-  static propTypes = DEFAULT_PROPS.definition;
-  static defaultProps = DEFAULT_PROPS.value;
+  static propTypes = PROPS.types;
+  static defaultProps = PROPS.defaultValues;
 
   constructor(props) {
     super(props);
@@ -33,20 +34,40 @@ class Button extends Control {
     return this.props.type;
   }
 
-  get controlClass() {
+  get buttonSize() {
+    return this.props.size;
+  }
+
+  get buttonClass() {
+    let btnSizeCls = buttonSizeClass.call(this);
     return ClassUtils.combine("hy-btn-", "hy-btn", {
-      [`${this.type}`]: this.type
+      [`${this.type}`]: this.type,
+      [`${btnSizeCls}`]: btnSizeCls,
     });
   }
 
-  render() {
+  html() {
     return (
       <button control-name={this.controlName} disabled={this.disabled}
-        className={this.controlClass}
+        className={this.buttonClass}
         onClick={(e) => { this.onClick(e) }}>
         {this.content}
       </button>
     );
+  }
+}
+
+/**
+ *  large => lg
+  * small => sm
+ */
+function buttonSizeClass() {
+  if (this.buttonSize === "large") {
+    return "lg";
+  }
+
+  if (this.buttonSize === "small") {
+    return "sm";
   }
 }
 

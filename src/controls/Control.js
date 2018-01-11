@@ -1,30 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Cores from "./core/index";
 
-class Props {
+class ControlProps extends Cores.Props {
   constructor() {
-    this.definition = {
-      className: PropTypes.string,
-      disabled: PropTypes.bool,
-      content: PropTypes.any
-    };
+    super();
 
-    this.value = {
-      disabled: false,
-      content: null,
-      className: null
-    };
+    this.add("className", PropTypes.string)
+      .add("disabled", PropTypes.bool, false)
+      .add("visibility", PropTypes.bool, true)
+      .add("content", PropTypes.any);
   }
 }
 
-export let ControlProps = Props;
+export { ControlProps };
 
-const DEFAULT_PROPS = new ControlProps();
+const PROPS = new ControlProps();
 
 class Control extends React.Component {
 
-  static propTypes = DEFAULT_PROPS.definition;
-  static defaultProps = DEFAULT_PROPS.value;
+  static propTypes = PROPS.types;
+  static defaultProps = PROPS.defaultValues;
 
   constructor(props) {
     super(props);
@@ -32,7 +28,7 @@ class Control extends React.Component {
     if (typeof props.init === "function") {
       props.init.apply(this, [this]);
     }
-    
+
     this.init();
   }
 
@@ -40,16 +36,7 @@ class Control extends React.Component {
     this.state = {};
     this.state.disabled = this.props.disabled;
     this.state.content = this.props.content;
-  }
-
-  initStateProp(propName, propValue) {
-    this.state[propName] = propValue;
-  }
-
-  getPropValueOrDefault(propName, defaultValue) {
-    if (this.props.hasOwnProperty(propName)) {
-
-    }
+    this.state.visibility = this.props.visibility;
   }
 
   get controlName() {
@@ -61,7 +48,19 @@ class Control extends React.Component {
   }
 
   get disabled() {
-    return this.props.disabled === true;
+    return this.state.disabled === true;
+  }
+
+  set disabled(value) {
+    this.setState({ disabled: value });
+  }
+
+  get visibility() {
+    return this.state.visibility !== false;
+  }
+
+  set visibility(value) {
+    this.setState({ visibility: value });
   }
 
   get content() {
@@ -118,10 +117,20 @@ class Control extends React.Component {
   }
 
   onClick(event) {
-    this.raiseEvent("click", event);
+    if (!this.disabled) {
+      this.raiseEvent("click", event);
+    }
   }
 
   render() {
+    if (this.visibility) {
+      return this.html();
+    }
+
+    return null;
+  }
+
+  html() {
     return (
       <div control-name={this.controlName} className={this.controlClass}>{this.content}</div>
     );

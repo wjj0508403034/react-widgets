@@ -2,10 +2,12 @@
  * export control interface
  */
 
-import Button from "./button/Button"
+import Cores from "./core/index";
+import Button from "./button/Button";
 
 let Controls = {
-  Button: Button
+  Button: Button,
+  Cores: Cores
 };
 
 export default Controls;
