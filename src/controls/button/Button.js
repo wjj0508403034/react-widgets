@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Control, { ControlProps } from "./../Control";
-import { ClassUtils } from "./../utils/index"
+import Utils from "./../utils/index"
 import "./style/Button.css"
 
 
@@ -40,7 +40,7 @@ class Button extends Control {
 
   get buttonClass() {
     let btnSizeCls = buttonSizeClass.call(this);
-    return ClassUtils.combine("hy-btn-", "hy-btn", {
+    return Utils.Dom.combineClass("hy-btn-", "hy-btn", {
       [`${this.type}`]: this.type,
       [`${btnSizeCls}`]: btnSizeCls,
     });
@@ -48,7 +48,7 @@ class Button extends Control {
 
   html() {
     return (
-      <button control-name={this.controlName} disabled={this.disabled}
+      <button id={this.id} name={this.name} control={this.controlName} disabled={this.disabled}
         className={this.buttonClass}
         onClick={(e) => { this.onClick(e) }}>
         {this.content}

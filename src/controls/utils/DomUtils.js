@@ -1,7 +1,7 @@
 
-class Utils {
+class DomUtils {
 
-  combine(prefixClass, className, classes) {
+  static combineClass(prefixClass, className, classes) {
     if (!classes) {
       return className;
     }
@@ -19,6 +19,5 @@ class Utils {
   }
 }
 
-let ClassUtils = new Utils();
 
-export default ClassUtils;
+export default DomUtils;

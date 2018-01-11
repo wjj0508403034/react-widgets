@@ -1,2 +1,9 @@
+import StringUtils from "./StringUtils";
+import DomUtils from "./DomUtils";
 
-export { default as ClassUtils } from "./ClassUtils";
+const Utils = {
+  String: StringUtils,
+  Dom: DomUtils
+}
+
+export default Utils;
