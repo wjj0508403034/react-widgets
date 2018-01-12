@@ -12,9 +12,12 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "webpack-build": "webpack"
   },
   "devDependencies": {
-    "babel-eslint": "^8.2.1"
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.1",
+    "webpack": "^3.10.0"
   }
 }
