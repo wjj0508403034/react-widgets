@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Cores from "./core/index";
-import Utils from "./utils/index";
 
 class ControlProps extends Cores.Props {
   constructor() {
@@ -36,9 +35,15 @@ class Control extends React.Component {
 
   init() {
     this.state = {};
-    this.state.disabled = this.props.disabled;
-    this.state.content = this.props.content;
-    this.state.visibility = this.props.visibility;
+    this.initValue("disabled")
+      .initValue("content")
+      .initValue("visibility");
+  }
+
+  initValue(targetPropName, sourcePropName) {
+    let propName = sourcePropName || targetPropName;
+    this.state[targetPropName] = this.props[propName];
+    return this;
   }
 
   get id() {
@@ -49,8 +54,8 @@ class Control extends React.Component {
     return this.__id
   }
 
-  get name(){
-    if(!this.props.name){
+  get name() {
+    if (!this.props.name) {
       return this.id;
     }
 

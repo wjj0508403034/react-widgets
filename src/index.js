@@ -39,6 +39,12 @@ var view = [
     button.on("click", function () {
       console.log(arguments)
     });
+  }} />,
+
+  <Controls.Inputs.Text name="input1" init={input => {
+    input.on("valueChanged", function (newVal, oldVal, control) {
+      console.log(arguments)
+    });
   }} />
 ];
 

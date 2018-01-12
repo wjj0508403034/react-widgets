@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Control, { ControlProps } from "./../Control";
-import Utils from "./../utils/index"
-import "./style/Button.css"
+import Utils from "./../utils/index";
+import "./style/Button.css";
 
 
 const ButtonTypes = ["primary", "ghost", "dashed", "danger"];
@@ -25,10 +25,6 @@ class Button extends Control {
 
   static propTypes = PROPS.types;
   static defaultProps = PROPS.defaultValues;
-
-  constructor(props) {
-    super(props);
-  }
 
   get type() {
     return this.props.type;
